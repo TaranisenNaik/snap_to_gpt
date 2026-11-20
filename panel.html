@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ChatGPT</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; font: 12px system-ui, sans-serif; }
+    body { display: flex; flex-direction: column; background: #fff; color: #222; }
+    @media (prefers-color-scheme: dark) { body { background: #212121; color: #ddd; } #bar { border-color: #333 !important; } button:hover { background: #333 !important; } }
+    #bar { display: flex; align-items: center; gap: 4px; padding: 4px 8px; border-bottom: 1px solid #e5e5e5; flex: 0 0 auto; }
+    #bar .title { font-weight: 600; }
+    #bar .hint { opacity: .6; margin-left: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #bar .spacer { flex: 1; }
+    button { border: 0; background: transparent; color: inherit; font-size: 14px; width: 26px; height: 24px; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #f0f0f0; }
+    iframe { flex: 1 1 auto; border: 0; width: 100%; }
+    #toast { position: absolute; left: 8px; right: 8px; top: 38px; z-index: 10; background: #b42318; color: #fff; padding: 8px 10px; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.25); }
+  </style>
+</head>
+<body>
+  <div id="bar">
+    <span class="title">Snap → ChatGPT</span>
+    <span class="hint" id="hint"></span>
+    <span class="spacer"></span>
+    <button id="newChat" title="New chat">＋</button>
+    <button id="reload" title="Reload ChatGPT">↻</button>
+    <button id="settings" title="Options: default prompt, shortcuts &amp; prompt history">⚙</button>
+  </div>
+  <div id="toast" hidden></div>
+  <iframe id="gpt" src="https://chatgpt.com/" allow="clipboard-read; clipboard-write; microphone"></iframe>
+  <script src="panel.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "Snap to ChatGPT",
+  "version": "1.7.0",
+  "description": "Opens ChatGPT in the side panel and sends a screenshot of the page you're working on, with your default prompt or one picked from your prompt history.",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "activeTab",
+    "declarativeNetRequestWithHostAccess"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://*.chatgpt.com/*",
+    "https://*.openai.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "panel.html"
+  },
+  "action": {
+    "default_title": "Open ChatGPT side panel",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": ["defaults.js", "content.js"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "quick-ask": {
+      "suggested_key": { "default": "Ctrl+Shift+S" },
+      "description": "Screenshot the page and send it to ChatGPT with the default prompt"
+    },
+    "prompt-history": {
+      "suggested_key": { "default": "Ctrl+Shift+H" },
+      "description": "Screenshot the page and change the prompt (Ctrl+Shift+H)"
+    }
+  }
+}

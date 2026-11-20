@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Snap to ChatGPT – Settings</title>
+  <style>
+    :root { color-scheme: light dark; --acc: #10a37f; --line: rgba(128,128,128,.3); }
+    body { font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; max-width: 760px; margin: 32px auto; padding: 0 20px; }
+    h1 { font-size: 22px; margin: 0 0 4px; }
+    h2 { font-size: 16px; margin: 28px 0 8px; }
+    .sub { opacity: .7; margin: 0 0 20px; }
+    section { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin-bottom: 16px; }
+    textarea, input[type=text] { width: 100%; box-sizing: border-box; font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: transparent; color: inherit; }
+    textarea { min-height: 90px; resize: vertical; }
+    label.chk { display: flex; gap: 8px; align-items: flex-start; margin-top: 10px; }
+    button { font: inherit; padding: 6px 14px; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: inherit; cursor: pointer; }
+    button.primary { background: var(--acc); border-color: var(--acc); color: #fff; }
+    .row { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
+    .saved { color: var(--acc); opacity: 0; transition: opacity .3s; }
+    .saved.show { opacity: 1; }
+    table { border-collapse: collapse; width: 100%; }
+    td { padding: 6px 4px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    kbd { font: 12px ui-monospace, monospace; border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; }
+    ol#history { margin: 0; padding: 0; list-style: none; max-height: 360px; overflow-y: auto; }
+    ol#history li { display: flex; gap: 10px; align-items: flex-start; padding: 8px 4px; border-bottom: 1px solid var(--line); }
+    ol#history li span { flex: 1; white-space: pre-wrap; word-break: break-word; }
+    ol#history li button { padding: 0 8px; }
+    .muted { opacity: .65; }
+  </style>
+</head>
+<body>
+  <h1>Snap to ChatGPT</h1>
+  <p class="sub">Screenshot the page you're working on and ask ChatGPT about it, right in the side panel.</p>
+
+  <section>
+    <h2 style="margin-top:0">Default prompt</h2>
+    <p class="muted" style="margin-top:0">Sent automatically with the screenshot when you press <b>Ctrl+Shift+S</b>.</p>
+    <textarea id="defaultPrompt"></textarea>
+    <label class="chk"><input type="checkbox" id="newChat"> <span>Start a new chat for every screenshot (off by default: screenshots go into the conversation that's open)</span></label>
+    <div class="row"><button class="primary" id="save">Save</button><span class="saved" id="savedMsg">Saved ✓</span></div>
+  </section>
+
+  <section>
+    <h2 style="margin-top:0">Keyboard shortcuts</h2>
+    <table id="shortcuts"></table>
+    <div class="row"><button id="changeKeys">Change shortcuts…</button>
+      <span class="muted">Opens chrome://extensions/shortcuts</span></div>
+  </section>
+
+  <section>
+    <h2 style="margin-top:0">Prompt history</h2>
+    <p class="muted" style="margin-top:0">Shown above the input box with the <b>Pick prompt</b> shortcut, newest at the bottom. Prompts you send there are added automatically.</p>
+    <ol id="history"></ol>
+    <div class="row">
+      <input type="text" id="newPrompt" placeholder="Add a prompt to the list…">
+      <button id="add">Add</button>
+    </div>
+    <div class="row"><button id="clear">Clear all</button></div>
+  </section>
+
+  <script src="defaults.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
