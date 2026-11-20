@@ -26,6 +26,10 @@
     ol#history li span { flex: 1; white-space: pre-wrap; word-break: break-word; }
     ol#history li button { padding: 0 8px; }
     .muted { opacity: .65; }
+    a { color: var(--acc); }
+    a.btn { text-decoration: none; padding: 6px 14px; border-radius: 8px; border: 1px solid var(--line); color: inherit; }
+    a.btn:hover { border-color: var(--acc); }
+    footer { text-align: center; opacity: .75; margin: 24px 0 8px; font-size: 13px; }
   </style>
 </head>
 <body>
@@ -57,6 +61,22 @@
     </div>
     <div class="row"><button id="clear">Clear all</button></div>
   </section>
+
+  <section>
+    <h2 style="margin-top:0">Feedback &amp; support</h2>
+    <p style="margin:0 0 10px">Found a bug, have feedback, or want to suggest a new feature? Email
+      <b id="email">naiktaranisen07@gmail.com</b> <button id="copyEmail" style="padding:2px 10px">Copy</button>
+      <span class="saved" id="copiedMsg">Copied ✓</span></p>
+    <div class="row" style="flex-wrap:wrap">
+      <button class="mail" data-subject="Bug report">🐞 Report a bug</button>
+      <button class="mail" data-subject="Feature suggestion">💡 Suggest a feature</button>
+      <button class="mail" data-subject="Feedback">✉️ Send feedback</button>
+    </div>
+    <p class="muted" style="margin:10px 0 0;font-size:13px">These open a new email in Gmail.
+      Use another email app? <a href="#" id="mailApp">Open in your default email app</a>.</p>
+  </section>
+
+  <footer>Made with <span style="color:#e0245e">❤</span> from India 🇮🇳</footer>
 
   <script src="defaults.js"></script>
   <script src="options.js"></script>

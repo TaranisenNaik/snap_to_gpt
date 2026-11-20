@@ -1,14 +1,19 @@
 {
   "manifest_version": 3,
   "name": "Snap to ChatGPT",
-  "version": "1.7.0",
+  "version": "1.13.0",
   "description": "Opens ChatGPT in the side panel and sends a screenshot of the page you're working on, with your default prompt or one picked from your prompt history.",
   "minimum_chrome_version": "116",
   "permissions": [
     "sidePanel",
     "storage",
     "activeTab",
-    "declarativeNetRequestWithHostAccess"
+    "declarativeNetRequestWithHostAccess",
+    "scripting",
+    "offscreen",
+    "clipboardRead",
+    "clipboardWrite",
+    "debugger"
   ],
   "host_permissions": [
     "https://chatgpt.com/*",
@@ -52,6 +57,10 @@
     "prompt-history": {
       "suggested_key": { "default": "Ctrl+Shift+H" },
       "description": "Screenshot the page and change the prompt (Ctrl+Shift+H)"
+    },
+    "send-selection": {
+      "suggested_key": { "default": "Ctrl+Shift+Y" },
+      "description": "Send the selected text to ChatGPT (Ctrl+Shift+Y)"
     }
   }
 }

@@ -24,7 +24,8 @@ $("save").onclick = async () => {
 function loadShortcuts() {
   const labels = {
     "quick-ask": "Ask — screenshot + default prompt",
-    "prompt-history": "Pick prompt — screenshot + choose from history (↑/↓)"
+    "prompt-history": "Pick prompt — screenshot + choose from history (↑/↓)",
+    "send-selection": "Send selection — paste the selected text into ChatGPT and send it"
   };
   chrome.commands.getAll((cmds) => {
     const t = $("shortcuts");
@@ -92,6 +93,47 @@ $("clear").onclick = async () => {
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === "local" && changes[KEY]) renderHistory();
 });
+
+// ---------- feedback ----------
+const FEEDBACK_EMAIL = "naiktaranisen07@gmail.com";
+const version = chrome.runtime.getManifest().version;
+const subjectFor = (kind) => `Snap to ChatGPT v${version} - ${kind}`;
+const bodyText = `\n\n---\nExtension version: ${version}\nBrowser: ${navigator.userAgent}\n`;
+
+// Gmail compose in a new tab (works without a desktop email app being set up).
+document.querySelectorAll("button.mail").forEach((btn) => {
+  btn.onclick = () => {
+    const url =
+      "https://mail.google.com/mail/?view=cm&fs=1" +
+      "&to=" + encodeURIComponent(FEEDBACK_EMAIL) +
+      "&su=" + encodeURIComponent(subjectFor(btn.dataset.subject)) +
+      "&body=" + encodeURIComponent(bodyText);
+    chrome.tabs.create({ url });
+  };
+});
+
+// Default email app (Outlook, Mail, etc.).
+$("mailApp").onclick = (e) => {
+  e.preventDefault();
+  const url = "mailto:" + FEEDBACK_EMAIL +
+    "?subject=" + encodeURIComponent(subjectFor("Feedback")) +
+    "&body=" + encodeURIComponent(bodyText);
+  chrome.tabs.update({ url }).catch(() => (window.location.href = url));
+};
+
+$("copyEmail").onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(FEEDBACK_EMAIL);
+  } catch (e) {
+    const r = document.createRange();
+    r.selectNodeContents($("email"));
+    getSelection().removeAllRanges();
+    getSelection().addRange(r);
+    document.execCommand("copy");
+  }
+  $("copiedMsg").classList.add("show");
+  setTimeout(() => $("copiedMsg").classList.remove("show"), 1500);
+};
 
 loadSettings();
 loadShortcuts();

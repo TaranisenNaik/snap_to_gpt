@@ -378,7 +378,7 @@
   const isFreshChat = () => location.pathname === "/";
 
   async function handleJob(job) {
-    if (!job || !job.image || busy || navigating) return;
+    if (!job || job.error || !(job.image || job.text) || busy || navigating) return;
     if (Date.now() - job.ts > 120000) { chrome.storage.session.remove("job"); return; }
     busy = true;
     try {
@@ -396,6 +396,21 @@
       if (!ed) { toast("Couldn't find the ChatGPT input box. Are you logged in?"); return; }
 
       if (pickerOpen) closePicker();
+
+      // Third shortcut: paste the selected text and send it (no screenshot).
+      if (job.mode === "text") {
+        setText(ed, job.text);
+        if (!getText(getEditor())) {
+          const dt = new DataTransfer();
+          dt.setData("text/plain", job.text);
+          getEditor().dispatchEvent(new ClipboardEvent("paste", { clipboardData: dt, bubbles: true, cancelable: true }));
+          await sleep(300);
+        }
+        if (getText(getEditor())) await sendWhenReady();
+        else toast("Couldn't paste the selected text into ChatGPT.");
+        return;
+      }
+
       setText(ed, "");
       const stamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
       const ok = await attachImage(dataUrlToFile(job.image, `screenshot-${stamp}.png`));
