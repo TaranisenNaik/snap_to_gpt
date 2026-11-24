@@ -22,7 +22,7 @@ document.getElementById("settings").onclick = () => chrome.runtime.openOptionsPa
 chrome.commands.getAll((cmds) => {
   const key = (name) => (cmds.find((c) => c.name === name) || {}).shortcut || "not set";
   document.getElementById("hint").textContent =
-    `${key("quick-ask")} ask · ${key("prompt-history")} pick prompt · ${key("send-selection")} send selection`;
+    `${key("quick-ask")} ask · ${key("prompt-history")} pick prompt · ${key("send-selection")} send selection · ${key("area-screenshot")} area`;
 });
 
 function onJob(job) {

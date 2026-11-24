@@ -25,7 +25,8 @@ function loadShortcuts() {
   const labels = {
     "quick-ask": "Ask — screenshot + default prompt",
     "prompt-history": "Pick prompt — screenshot + choose from history (↑/↓)",
-    "send-selection": "Send selection — paste the selected text into ChatGPT and send it"
+    "send-selection": "Send selection — paste the selected text into ChatGPT and send it",
+    "area-screenshot": "Area screenshot — drag to select part of the page, then Ask (Enter) or Choose prompt (H)"
   };
   chrome.commands.getAll((cmds) => {
     const t = $("shortcuts");
@@ -97,7 +98,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 // ---------- feedback ----------
 const FEEDBACK_EMAIL = "naiktaranisen07@gmail.com";
 const version = chrome.runtime.getManifest().version;
-const subjectFor = (kind) => `Snap to ChatGPT v${version} - ${kind}`;
+const subjectFor = (kind) => `Aski v${version} - ${kind}`;
 const bodyText = `\n\n---\nExtension version: ${version}\nBrowser: ${navigator.userAgent}\n`;
 
 // Gmail compose in a new tab (works without a desktop email app being set up).

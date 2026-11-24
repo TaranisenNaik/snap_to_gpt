@@ -1,4 +1,4 @@
-importScripts("defaults.js");
+importScripts("defaults.js", "area.js");
 
 const RULE_TAB_NONE = 1001;
 const RULE_INITIATOR = 1002;
@@ -224,7 +224,7 @@ async function sendSelection(tab) {
       }
     }
   }
-  if (!text) console.warn("[Snap to ChatGPT] selection failed", tab.url, errors);
+  if (!text) console.warn("[Aski] selection failed", tab.url, errors);
 
   await chrome.storage.session.set({
     job: text ? { id, mode: "text", text, ts: Date.now() } : { id, mode: "text", ts: Date.now(), error }
@@ -234,6 +234,7 @@ async function sendSelection(tab) {
 chrome.commands.onCommand.addListener((command, tab) => {
   if (!tab) return;
   if (command === "send-selection") { sendSelection(tab); return; }
+  if (command === "area-screenshot") { startAreaCapture(tab); return; }
   if (command !== "quick-ask" && command !== "prompt-history") return;
   const mode = command === "quick-ask" ? "auto" : "pick";
   const windowId = tab.windowId;

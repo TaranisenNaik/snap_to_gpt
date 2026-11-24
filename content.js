@@ -434,7 +434,7 @@
         await openPicker();
       }
     } catch (err) {
-      console.error("[Snap to ChatGPT]", err);
+      console.error("[Aski]", err);
       toast("Something went wrong: " + err.message);
     } finally {
       busy = false;

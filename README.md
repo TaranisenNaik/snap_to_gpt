@@ -1,4 +1,4 @@
-# Snap to ChatGPT (Chrome extension)
+# Aski — ChatGPT in your side panel (Chrome extension)
 
 Opens ChatGPT in Chrome's side panel and sends it a screenshot of the page you're working on.
 The screenshot only ever contains the page area. The side panel is never in it, even when it's already open.
@@ -6,7 +6,7 @@ The screenshot only ever contains the page area. The side panel is never in it, 
 ## Install
 1. Unzip this folder.
 2. Open `chrome://extensions`, turn on **Developer mode** (top right).
-3. Click **Load unpacked** and select the `snap-to-chatgpt` folder.
+3. Click **Load unpacked** and select the `aski` folder.
 4. Log in to ChatGPT once at https://chatgpt.com in a normal tab. The side panel uses the same login.
 
 ## Shortcuts
@@ -15,6 +15,7 @@ The screenshot only ever contains the page area. The side panel is never in it, 
 | **Ctrl+Shift+S** | **Ask:** screenshots the page, opens ChatGPT in the side panel, attaches the image and sends it with your **default prompt** |
 | **Ctrl+Shift+H** | **Pick prompt:** screenshots the page, opens ChatGPT, attaches the image and leaves the input box **empty and focused**, with a scrollable list of your past prompts above it (newest at the bottom) |
 | **Ctrl+Shift+Y** | **Send selection:** pastes the text you've selected on the page into ChatGPT and sends it (no screenshot). Works in PDFs too: the extension presses Ctrl+C for you |
+| **Ctrl+Shift+X** | **Area screenshot:** the page freezes and you drag a box around the part you want (like the Windows Snipping Tool). Then **Enter / Ask** sends it with the default prompt, **H / Choose prompt** opens the prompt list, **Esc** cancels |
 
 You can change the shortcuts at `chrome://extensions/shortcuts`. On a Mac, Ctrl becomes Command (Cmd+Shift+S / Cmd+Shift+H).
 
@@ -44,4 +45,4 @@ Bug reports, feedback and feature ideas: naiktaranisen07@gmail.com
 
 Made with ❤ from India 🇮🇳
 
-- In PDFs, Chrome briefly shows a "Snap to ChatGPT started debugging this browser" bar when you use Ctrl+Shift+Y. That's Chrome's notice that the extension pressed Ctrl+C for you; it closes on its own.
+- In PDFs, Chrome briefly shows a "Aski started debugging this browser" bar when you use Ctrl+Shift+Y. That's Chrome's notice that the extension pressed Ctrl+C for you; it closes on its own.

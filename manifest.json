@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Snap to ChatGPT",
-  "version": "1.13.0",
+  "name": "Aski",
+  "version": "1.15.0",
   "description": "Opens ChatGPT in the side panel and sends a screenshot of the page you're working on, with your default prompt or one picked from your prompt history.",
   "minimum_chrome_version": "116",
   "permissions": [
@@ -61,6 +61,10 @@
     "send-selection": {
       "suggested_key": { "default": "Ctrl+Shift+Y" },
       "description": "Send the selected text to ChatGPT (Ctrl+Shift+Y)"
+    },
+    "area-screenshot": {
+      "suggested_key": { "default": "Ctrl+Shift+X" },
+      "description": "Select an area of the page to screenshot and send to ChatGPT (Ctrl+Shift+X)"
     }
   }
 }
